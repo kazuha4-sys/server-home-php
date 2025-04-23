@@ -4,7 +4,7 @@ include 'config/db.php';
 
 // Função para verificar se o IP é de um proxy, VPN ou Tor
 function is_vpn_or_tor($ip) {
-    $apiKey = "53a89e37995528";  // Você vai precisar registrar uma chave da API, se necessário
+    $apiKey = "COLOQUE SUA API AQUI";  // Você vai precisar registrar uma chave da API, se necessário
     $url = "http://ipinfo.io/{$ip}/json?token={$apiKey}";  // Substitua pela URL da API
 
     $response = file_get_contents($url);
