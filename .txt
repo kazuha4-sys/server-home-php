@@ -1,0 +1,58 @@
+ PASSO 1 – Cria a pasta e o arquivo no Windows
+Tu pode fazer isso manualmente:
+
+Vai na pasta do teu projeto.
+
+Cria uma pasta chamada logs.
+
+Dentro dela, cria um arquivo chamado acessos.log. Deixa ele vazio mesmo.
+
+Ou, se quiser fazer automaticamente no PHP, usa isso aqui no início do código:
+
+php
+Copiar
+Editar
+// Cria pasta e arquivo se não existirem (Windows friendly)
+$logDir = __DIR__ . '/logs';
+$logFile = $logDir . '/acessos.log';
+
+if (!file_exists($logDir)) {
+    mkdir($logDir, 0777, true); // ignora a permissão no Windows
+}
+
+if (!file_exists($logFile)) {
+    file_put_contents($logFile, ""); // cria o arquivo vazio
+}
+💀 PASSO 2 – Código que loga IP, data, URL e navegador
+Esse código aqui é plug-and-play. Cola no início de todos os seus scripts PHP ou no index.php principal.
+
+php
+Copiar
+Editar
+// Pega as info do usuário
+$ip = $_SERVER['REMOTE_ADDR'];
+$data = date('Y-m-d H:i:s');
+$pagina = $_SERVER['REQUEST_URI'];
+$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'Desconhecido 🤷';
+
+// Formata o log
+$log = "[$data] IP: $ip | Página: $pagina | Navegador: $userAgent\n";
+
+// Grava no arquivo
+file_put_contents(__DIR__ . '/logs/acessos.log', $log, FILE_APPEND);
+⚠️ DICA DE SEGURANÇA
+Mesmo no Windows, o ideal é:
+
+Não deixar o arquivo acessos.log público (nada de acessar via navegador).
+
+Se possível, bloquear acesso via .htaccess:
+
+apache
+Copiar
+Editar
+<Files "acessos.log">
+  Order allow,deny
+  Deny from all
+</Files>
+(Só se você tiver usando Apache com .htaccess ativado)
+

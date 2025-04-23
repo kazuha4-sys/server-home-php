@@ -1,0 +1,20 @@
+CREATE DATABASE IF NOT EXISTS servidor;
+
+USE servidor;
+
+CREATE TABLE IF NOT EXISTS arquivos (
+    id INT AUTO_INCREMENT PRIMARY KEY, -- o ID de cada arquivo
+    nome VARCHAR(255) NOT NULL,
+    tamanho BIGINT NOT NULL,
+    dono VARCHAR(100) NOT NULL,
+    data_upload TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS logs_acess(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    ip VARCHAR(45),
+    user_agent TEXT,
+    pagina_acessada VARCHAR(255),
+    data_acesso TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

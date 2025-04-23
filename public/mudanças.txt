@@ -1,0 +1,3 @@
+eu mudei o arquivo php.ini para caso alguem fosse invadir o servidor ele não sabia o erro, quando for programar edit as linhas
+506 - display_errors=On
+525 - log_errors=On
